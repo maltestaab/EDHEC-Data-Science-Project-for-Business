@@ -26,4 +26,12 @@ def send_back_input(input: InputPayload):
     prediction = loaded_model.predict(input_array)
 
     return {"message": f"Input: {input.sepal_length} Sepal Length. {input.sepal_width} \
-            Sepal Width. {input.petal_length} Petal Length. {input.petal_width} Pe
+            Sepal Width. {input.petal_length} Petal Length. {input.petal_width} Petal Width. \n \
+                Consequently, the type is: {prediction}."}
+
+
+
+
+
+
+
