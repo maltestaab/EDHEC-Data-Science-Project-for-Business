@@ -5,17 +5,17 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from preprocessing import transform_input_data  # Import preprocessing functions
 
-# ✅ Load the trained model
+# Load the trained model
 with open("model_4.pkl", "rb") as file:
     model = pickle.load(file)
 
-# ✅ Get expected feature names from the trained model
+# Get expected feature names from the trained model
 model_features = model.feature_names_in_
 
-# ✅ Initialize FastAPI app
+# Initialize FastAPI app
 app = FastAPI()
 
-# ✅ Define the input data format using Pydantic
+# Define the input data format using Pydantic
 class InputData(BaseModel):
     manufacturer: str
     model: str
@@ -34,12 +34,12 @@ class InputData(BaseModel):
     airbags: int
     engine_volume: int  # Assume in liters (e.g., 1.8 -> 1800 cc)
 
-# ✅ Root endpoint (for testing)
+# Root endpoint (for testing)
 @app.get("/")
 def home():
     return {"message": "Car Price Prediction API is running!"}
 
-# ✅ Prediction endpoint
+# Prediction endpoint
 @app.post("/predict")
 def predict(data: InputData):
     # Convert input data to dictionary
