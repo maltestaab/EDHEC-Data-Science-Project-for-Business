@@ -1,9 +1,6 @@
 import pandas as pd
 import numpy as np
 
-import pandas as pd
-import numpy as np
-
 def transform_input_data(input_dict, model_features):
     """
     Transforms raw input data into the format required by the trained model.
