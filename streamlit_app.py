@@ -15,35 +15,34 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    .stApp {
-        background-color: #f5f5f5;
+    html, body, [class^="st-"] {
+        background-color: #f5f5f5 !important;
+        color: #000000 !important;
     }
-    .stTitle {
-        font-size: 36px;
-        font-weight: bold;
-        color: #2E86C1;
-        text-align: center;
+    .stApp {
+        background-color: #f5f5f5 !important;
+    }
+    .stTitle, .stMarkdown {
+        color: #2E86C1 !important;
     }
     .stSidebar {
-        background-color: #EAECEE;
+        background-color: #EAECEE !important;
     }
     .stButton>button {
-        background-color: #2E86C1;
-        color: white;
+        background-color: #2E86C1 !important;
+        color: white !important;
         font-size: 18px;
         border-radius: 10px;
         padding: 10px;
     }
-    .stSuccess {
-        font-size: 24px;
-        font-weight: bold;
-        color: #229954;
-        text-align: center;
+    .stRadio label, .stSelectbox, .stNumberInput, .stTextInput {
+        color: #000000 !important;
     }
     </style>
     """,
     unsafe_allow_html=True,
 )
+
 
 # Sidebar for Context - Cool & Engaging Description
 st.sidebar.title("🚀 Smart Car Price Estimator")
