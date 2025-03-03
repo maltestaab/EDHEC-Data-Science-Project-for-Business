@@ -12,12 +12,6 @@ def preprocess_data(df, model_features):
     # Convert Turbo from "Yes"/"No" to binary (1/0)
     df["turbo"] = df["turbo"].apply(lambda x: 1 if x.lower() == "yes" else 0)
 
-    # Convert Engine volume to cubic cm
-    df["engine_volume"] = df["engine_volume"] * 1000
-
-    # Convert Cylinders to integer
-    df["cylinders"] = df["cylinders"].astype(int)
-
     # One-hot encoding for categorical variables
     categorical_cols = df.select_dtypes(include=["object"]).columns
     df = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
