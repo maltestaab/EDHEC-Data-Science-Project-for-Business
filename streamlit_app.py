@@ -35,7 +35,7 @@ st.markdown(
         border-radius: 10px;
         padding: 10px;
     }
-    .stRadio label, .stSelectbox, .stNumberInput, .stTextInput {
+    .stSelectbox, .stNumberInput, .stTextInput {
         color: #000000 !important;
     }
     </style>
@@ -43,43 +43,23 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-# Sidebar for Context - Cool & Engaging Description
+# Sidebar for Context
 st.sidebar.title("🚀 Smart Car Price Estimator")
 st.sidebar.markdown(
     """
     ### Know Your Car’s Worth Instantly! 🚗💨  
-    Ever wondered **how much your car is worth** in today’s market?  
-    Or planning to buy a vehicle and want to make sure **you’re paying a fair price**?  
+    Enter your car details, and our AI will estimate its price accurately.  
 
-    With **this AI-powered Car Price Estimator**, you can quickly and **accurately predict car prices** based on essential features such as:  
-    - ✅ **Manufacturer & Model**  
-    - ✅ **Production Year**  
-    - ✅ **Fuel Type & Engine Volume**  
-    - ✅ **Mileage & Cylinders**  
-    - ✅ **Transmission & Drive Type**  
-    - ✅ **Color, Interior, & Extras**  
-
-    ---
-    
-    📊 **How It Works:**  
-    Simply enter your car’s details and let the model analyze **thousands of real-world data points**  
-    to provide an instant, **data-driven price prediction**.  
-
-    ---
-    
-    💡 **Why Use This Tool?**  
-    - 🚗 **Buying or Selling a Car?** Ensure you’re getting a **fair market price**.  
-    - 📈 **Car Enthusiast?** Compare different car features and see their impact on **resale value**.  
-    - 🤔 **Curious?** Play around with different configurations and discover how specs affect pricing!  
-
-    ---
-    
-    🚀 **Try it now and make informed car pricing decisions with confidence!**  
+    **Key Features:**  
+    - ✅ Manufacturer & Model  
+    - ✅ Production Year  
+    - ✅ Fuel Type & Engine Volume  
+    - ✅ Mileage & Cylinders  
+    - ✅ Transmission & Drive Type  
+    - ✅ Color, Interior, & Extras  
     """,
     unsafe_allow_html=True,
 )
-
 
 # Main Title
 st.markdown('<p class="stTitle">Car Price Prediction 🚙</p>', unsafe_allow_html=True)
@@ -109,13 +89,14 @@ with col1:
     fuel_type = st.selectbox("Fuel Type", FUEL_TYPE_OPTIONS)
     gear_box_type = st.selectbox("Gear Box Type", GEAR_BOX_OPTIONS)
     drive_wheels = st.selectbox("Drive Wheels", DRIVE_WHEELS_OPTIONS)
+    leather_interior = st.selectbox("Leather Interior", ["Yes", "No"])
+
 
 with col2:
-    leather_interior = st.radio("Leather Interior", ["Yes", "No"])
-    doors = st.radio("Number of Doors", ["2", "4", "larger/equal 5"])
-    wheel = st.radio("Wheel Position", ["Left wheel", "Right wheel"])
+    doors = st.selectbox("Number of Doors", ["2", "4", "larger/equal 5"])
+    wheel = st.selectbox("Wheel Position", ["Left wheel", "Right wheel"])
     color = st.selectbox("Color", COLOR_OPTIONS)
-    turbo = st.radio("Turbo", ["Yes", "No"])
+    turbo = st.selectbox("Turbo", ["Yes", "No"])
     mileage = st.number_input("Mileage (km)", min_value=0, value=100000)
     cylinders = st.number_input("Cylinders", min_value=1, max_value=16, value=4)
     airbags = st.number_input("Airbags", min_value=0, max_value=20, value=6)
