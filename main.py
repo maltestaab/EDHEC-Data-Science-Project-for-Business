@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 # Load the trained model
-with open("model.pkl", "rb") as file:
+with open("model_4.pkl", "rb") as file:
     model = pickle.load(file)
 
 # Get expected feature names from the trained model
