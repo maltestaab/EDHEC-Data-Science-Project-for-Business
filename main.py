@@ -5,14 +5,16 @@ import numpy as np
 import pandas as pd
 from preprocessing import transform_input_data  # Import preprocessing functions
 from fastapi.middleware.cors import CORSMiddleware
+from xgboost import XGBRegressor
+
 
 
 # Load the trained model
-with open("model_4.pkl", "rb") as file:
-    model = pickle.load(file)
+model = XGBRegressor()
+model.load_model("model.json")
 
 # Get expected feature names from the trained model
-model_features = model.feature_names_in_
+model_features = model.feature_names_in_  # ✅ Still works!
 
 # Initialize FastAPI app
 app = FastAPI()
