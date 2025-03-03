@@ -54,7 +54,3 @@ def preprocess_data(df, model_features):
 
 def transform_input_data(data, model_features):
     """
-    Convert input dictionary to DataFrame and apply preprocessing.
-    """
-    df = pd.DataFrame([data])
-    return preprocess_data(df, model_features)

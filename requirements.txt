@@ -17,3 +17,10 @@ httpx  # Async requests (used internally by FastAPI)
 
 # Streamlit (Frontend)
 streamlit
+
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+xgboost

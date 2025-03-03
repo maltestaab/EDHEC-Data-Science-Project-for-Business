@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Remote FastAPI API URL
-API_URL = "https://edhec-data-science-project-for-business.onrender.com/predict"
+API_URL = "https://edhec-data-science-project-for-business-1.onrender.com/predict"
 
 # Set page title and layout
 st.set_page_config(
