@@ -8,7 +8,6 @@ pandas
 scikit-learn
 
 # Model Serialization
-pickle5  # If using pickle in Python 3.8+
 joblib   # Alternative for model saving/loading
 
 # Middleware for CORS support
