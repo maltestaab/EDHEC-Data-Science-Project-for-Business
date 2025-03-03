@@ -1,0 +1,20 @@
+# FastAPI & Web Server
+fastapi
+uvicorn
+
+# Data Processing
+numpy
+pandas
+scikit-learn
+
+# Model Serialization
+pickle5  # If using pickle in Python 3.8+
+joblib   # Alternative for model saving/loading
+
+# Middleware for CORS support
+python-multipart  # Needed for form data handling
+requests  # Required for API calls from Streamlit
+httpx  # Async requests (used internally by FastAPI)
+
+# Streamlit (Frontend)
+streamlit
