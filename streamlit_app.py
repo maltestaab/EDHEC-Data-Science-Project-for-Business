@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Local FastAPI API URL (update this if deploying)
-API_URL = "http://127.0.0.1:8000/predict"
+API_URL = "https://edhec-data-science-project-for-business.onrender.com/predict"
 
 st.title("Car Price Prediction")
 
