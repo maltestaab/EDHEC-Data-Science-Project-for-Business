@@ -3,18 +3,11 @@ fastapi
 uvicorn
 
 # Data Processing
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
 xgboost
-optuna
-
 
 
 # Model Serialization
-joblib   # Alternative for model saving/loading
+   # Alternative for model saving/loading
 
 # Middleware for CORS support
 python-multipart  # Needed for form data handling
