@@ -4,7 +4,16 @@ uvicorn
 
 # Data Processing
 xgboost
-
+tensorflow 
+keras 
+kagglehub 
+numpy 
+pandas 
+optuna 
+joblib 
+scikit-learn 
+matplotlib 
+seaborn
 
 # Model Serialization
    # Alternative for model saving/loading
