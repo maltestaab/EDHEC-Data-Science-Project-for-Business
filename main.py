@@ -27,22 +27,22 @@ app.add_middleware(
 
 # Define the input data format using Pydantic
 class InputData(BaseModel):
-    manufacturer: str = Field(..., example="Toyota", description="Car manufacturer")
-    model: str = Field(..., example="Camry", description="Car model name")
-    prod_year: int = Field(..., example=2018, description="Production year of the car")
-    category: str = Field(..., example="Sedan", description="Category of the vehicle")
-    leather_interior: str = Field(..., example="Yes", description="Whether the car has a leather interior (Yes/No)")
-    fuel_type: str = Field(..., example="Petrol", description="Type of fuel used")
-    gear_box_type: str = Field(..., example="Automatic", description="Type of gearbox")
-    drive_wheels: str = Field(..., example="Front", description="Type of drive wheels (Front/Rear/All)")
-    doors: int = Field(..., example=4, description="Number of doors")
-    wheel: str = Field(..., example="Left wheel", description="Steering wheel position (Left/Right)")
-    color: str = Field(..., example="Black", description="Exterior color")
-    turbo: str = Field(..., example="No", description="Indicates if the car has a turbo (Yes/No)")
-    mileage: int = Field(..., example=50000, description="Total mileage in km")
-    cylinders: int = Field(..., example=4, description="Number of engine cylinders")
-    airbags: int = Field(..., example=6, description="Number of airbags")
-    engine_volume: int = Field(..., example=2000, description="Engine volume in cc (e.g., 1.8L -> 1800cc)")
+    manufacturer: str
+    model: str
+    prod_year: int
+    category: str
+    leather_interior: str
+    fuel_type: str
+    gear_box_type: str
+    drive_wheels: str
+    doors: int
+    wheel: str
+    color: str
+    turbo: str
+    mileage: int
+    cylinders: int
+    airbags: int
+    engine_volume: int
 
 # Root endpoint (for testing)
 @app.get("/")
