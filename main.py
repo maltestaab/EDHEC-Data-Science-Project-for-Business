@@ -4,6 +4,8 @@ import pickle
 import numpy as np
 import pandas as pd
 from preprocessing import transform_input_data  # Import preprocessing functions
+from fastapi.middleware.cors import CORSMiddleware
+
 
 # Load the trained model
 with open("model_4.pkl", "rb") as file:
@@ -14,6 +16,14 @@ model_features = model.feature_names_in_
 
 # Initialize FastAPI app
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows requests from any frontend (change to specific URL for security)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Define the input data format using Pydantic
 class InputData(BaseModel):
