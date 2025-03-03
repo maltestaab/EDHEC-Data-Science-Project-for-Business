@@ -1,3 +1,5 @@
+python>=3.7,<3.11
+
 # FastAPI & Web Server
 fastapi
 uvicorn
@@ -13,7 +15,6 @@ optuna
 keras
 kagglehub 
 tensorflow
-pickle
 
 # Model Serialization
 joblib   # Alternative for model saving/loading
