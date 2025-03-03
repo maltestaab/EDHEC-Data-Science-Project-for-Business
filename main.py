@@ -8,13 +8,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from xgboost import XGBRegressor
 
 
-
-# Load the trained model
+# Load the model from UBJ (More Compact than JSON)
 model = XGBRegressor()
-model.load_model("model.json")
+model.load_model("model.ubj")  # Uses smaller UBJ format
 
-# Get expected feature names from the trained model
-model_features = model.feature_names_in_  # ✅ Still works!
+# Extract model features (ensures compatibility with preprocessing)
+model_features = model.feature_names_in_
 
 # Initialize FastAPI app
 app = FastAPI()
