@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
-import pickle
 import numpy as np
 import pandas as pd
 from preprocessing import transform_input_data  # Import preprocessing functions
