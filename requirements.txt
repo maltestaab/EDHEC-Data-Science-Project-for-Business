@@ -6,6 +6,14 @@ uvicorn
 numpy
 pandas
 scikit-learn
+matplotlib
+seaborn
+xgboost
+optuna
+keras
+kagglehub 
+tensorflow
+pickle
 
 # Model Serialization
 joblib   # Alternative for model saving/loading
@@ -18,9 +26,5 @@ httpx  # Async requests (used internally by FastAPI)
 # Streamlit (Frontend)
 streamlit
 
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
-xgboost
+
+

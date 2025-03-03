@@ -1,60 +1,77 @@
 import pandas as pd
 import numpy as np
 
-def preprocess_data(df, model_features):
-    """
-    Apply preprocessing steps to the input DataFrame.
-    Ensure output matches the model's expected features.
-    All text-based data (column names and values) is transformed into lowercase.
-    """
+import pandas as pd
+import numpy as np
 
-    # Convert all column names and string values to lowercase
-    df.columns = df.columns.str.lower()
-    df = df.applymap(lambda x: x.lower() if isinstance(x, str) else x)
-
-    # Define categorical and numerical columns
-    categorical_cols = ['manufacturer', 'model', 'prod_year', 'category', 'leather_interior', 
-                        'fuel_type', 'gear_box_type', 'drive_wheels', 'doors', 'wheel', 'color', 'turbo']
+def transform_input_data(input_dict, model_features):
+    """
+    Transforms raw input data into the format required by the trained model.
     
-    numerical_cols = ['mileage', 'cylinders', 'airbags', 'engine_volume']
-
-    # Convert Turbo from "Yes"/"No" to binary (1/0)
-    if "turbo" in df.columns:
-        df["turbo"] = df["turbo"].apply(lambda x: 1 if x == "yes" else 0)
-
-    # List of models to be one-hot encoded (all lowercase)
+    Parameters:
+        input_dict (dict): Raw input data from the API request.
+        model_features (list): List of feature names expected by the model.
+    
+    Returns:
+        pd.DataFrame: Transformed input data ready for prediction.
+    """
+    # List of selected models for one-hot encoding
     selected_models = ['prius', 'sonata', 'camry', 'elantra', 'e 350', 'santa fe', 'fit', 'h1', 
                        'tucson', 'x5', 'aqua', 'cruze', 'fusion', 'optima', 'gx 460', 'transit', 
                        'highlander', 'ml 350', 'jetta', 'actyon', 'civic', 'rexton']
     
-    # Standardize "model" column (convert to lowercase and strip spaces)
-    if "model" in df.columns:
-        df["model"] = df["model"].str.strip()
-
-        # Replace models not in the selected list with "other"
-        df["model"] = df["model"].apply(lambda x: x if x in selected_models else "other")
-
-    # One-hot encoding for "Model" column (selected models + "other")
-    df = pd.get_dummies(df, columns=["model"], drop_first=True)
+    # Initialize feature dictionary with default values (0 for categorical, mean/median for numerical if needed)
+    transformed_features = {feature: 0 for feature in model_features}
     
-    # One-hot encoding for remaining categorical variables (excluding "model" which is already processed)
-    df = pd.get_dummies(df, columns=[col for col in categorical_cols if col != "model"], drop_first=True)
-
-    # Ensure that numerical columns are correctly handled (no transformations)
-    df[numerical_cols] = df[numerical_cols].astype(int)  # Ensure numeric types
-
-    # Ensure the order of columns matches the model's expected features
-    for col in model_features:
-        if col not in df:
-            df[col] = 0  # Add missing columns as zero (for unseen categories)
-
-    df = df[model_features]  # Reorder to match model input
-
+    # Convert all inputs to lowercase and strip spaces
+    input_dict = {key: str(value).lower().strip() if isinstance(value, str) else value for key, value in input_dict.items()}
+    
+    # Debugging: Print raw input data
+    print("Raw Input Dictionary:")
+    print(input_dict)
+    
+    # Map categorical features to binary representation
+    transformed_features[f"manufacturer_{input_dict['manufacturer']}"] = 1
+    
+    # Handle model column: if not in selected_models, map to "other"
+    model_name = input_dict['model'] if input_dict['model'] in selected_models else 'other'
+    transformed_features[f"Model_Grouped_{model_name}"] = 1
+    
+    transformed_features[f"category_{input_dict['category']}"] = 1
+    transformed_features[f"fuel_type_{input_dict['fuel_type']}"] = 1
+    transformed_features[f"gear_box_type_{input_dict['gear_box_type']}"] = 1
+    transformed_features[f"drive_wheels_{input_dict['drive_wheels']}"] = 1
+    transformed_features[f"color_{input_dict['color']}"] = 1
+    
+    # Map binary categorical features
+    transformed_features["leather_interior_yes"] = 1 if input_dict["leather_interior"] == "yes" else 0
+    transformed_features["turbo"] = 1 if input_dict["turbo"] == "yes" else 0
+    
+    # Handle special case for doors
+    if input_dict['doors'] == 4:
+        transformed_features["doors_04_may"] = 1
+    elif input_dict['doors'] >= 5:
+        transformed_features["doors_greater_5"] = 1
+    
+    # Assign numeric features directly
+    transformed_features["prod_year"] = input_dict["prod_year"]
+    transformed_features["mileage"] = input_dict["mileage"]
+    transformed_features["airbags"] = input_dict["airbags"]
+    transformed_features["engine_volume"] = input_dict["engine_volume"]
+    transformed_features["cylinders"] = input_dict["cylinders"]
+    
+    # Convert dictionary to DataFrame
+    df = pd.DataFrame([transformed_features])
+    
+    # Ensure correct column order
+    df = df.reindex(columns=model_features, fill_value=0)
+    
+    # Debugging: Print transformed DataFrame
+    print("\nTransformed Features (DataFrame):")
+    print(df)
+    print("\nExpected Model Features:")
+    print(model_features)
+    print("\nTransformed DataFrame Columns:")
+    print(df.columns.tolist())
+    
     return df
-
-def transform_input_data(data, model_features):
-    """
-    Convert input dictionary to DataFrame and apply preprocessing.
-    """
-    df = pd.DataFrame([data])
-    return preprocess_data(df, model_features)
