@@ -1,28 +1,45 @@
 import streamlit as st
 import requests
 
-# Render API URL (Update with your actual Render URL)
-API_URL = "https://edhec-data-science-project-for-business.onrender.com/"
+# Local FastAPI API URL (update this if deploying)
+API_URL = "http://127.0.0.1:8000/predict"
 
 st.title("Car Price Prediction")
 
-# Create input fields
+# Dropdown options
+CATEGORY_OPTIONS = ['Jeep', 'Hatchback', 'Sedan', 'Microbus', 'Goods wagon',
+                    'Universal', 'Coupe', 'Minivan', 'Cabriolet', 'Limousine', 'Pickup']
+
+FUEL_TYPE_OPTIONS = ['Hybrid', 'Petrol', 'Diesel', 'CNG', 'Plug-in Hybrid', 'LPG', 'Hydrogen']
+
+GEAR_BOX_OPTIONS = ['Automatic', 'Tiptronic', 'Variator', 'Manual']
+
+DRIVE_WHEELS_OPTIONS = ['4x4', 'Front', 'Rear']
+
+COLOR_OPTIONS = ['Silver', 'Black', 'White', 'Grey', 'Blue', 'Green', 'Red', 
+                 'Sky blue', 'Orange', 'Yellow', 'Brown', 'Golden', 'Beige', 
+                 'Carnelian red', 'Purple', 'Pink']
+
+# Input fields
 manufacturer = st.text_input("Manufacturer", "Toyota")
 model = st.text_input("Model", "Corolla")
-prod_year = st.number_input("Production Year", min_value=1990, max_value=2025, value=2018)
-category = st.text_input("Category", "Sedan")
+prod_year = st.number_input("Production Year", min_value=1900, max_value=2025, value=2018)
+
+category = st.selectbox("Category", CATEGORY_OPTIONS)
 leather_interior = st.radio("Leather Interior", ["Yes", "No"])
-fuel_type = st.text_input("Fuel Type", "Petrol")
-gear_box_type = st.text_input("Gear Box Type", "Automatic")
-drive_wheels = st.text_input("Drive Wheels", "Front")
-doors = st.number_input("Doors", min_value=2, max_value=6, value=4)
-wheel = st.radio("Wheel Position", ["Left", "Right"])
-color = st.text_input("Color", "White")
+fuel_type = st.selectbox("Fuel Type", FUEL_TYPE_OPTIONS)
+gear_box_type = st.selectbox("Gear Box Type", GEAR_BOX_OPTIONS)
+drive_wheels = st.selectbox("Drive Wheels", DRIVE_WHEELS_OPTIONS)
+
+doors = st.radio("Number of Doors", ["2", "4", "smaller/equal 5"])
+wheel = st.radio("Wheel Position", ["Left wheel", "Right wheel"])
+color = st.selectbox("Color", COLOR_OPTIONS)
 turbo = st.radio("Turbo", ["Yes", "No"])
-mileage = st.number_input("Mileage (km)", min_value=0, value=50000)
-cylinders = st.number_input("Cylinders", min_value=2, max_value=16, value=4)
-airbags = st.number_input("Airbags", min_value=0, max_value=10, value=6)
-engine_volume = st.number_input("Engine Volume (cc)", min_value=500, max_value=8000, value=1800)
+
+mileage = st.number_input("Mileage (km)", min_value=0, value=100000)
+cylinders = st.number_input("Cylinders", min_value=1, max_value=16, value=4)
+airbags = st.number_input("Airbags", min_value=0, max_value=20, value=6)
+engine_volume = st.number_input("Engine Volume (cc)", min_value=0, max_value=300000, value=1800)
 
 # Predict button
 if st.button("Predict Price"):
@@ -53,4 +70,3 @@ if st.button("Predict Price"):
         st.success(f"Predicted Price: ${result['predicted_price']:.2f}")
     else:
         st.error("Error in prediction request.")
-
