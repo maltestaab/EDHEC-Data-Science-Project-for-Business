@@ -71,3 +71,8 @@ def predict(data: InputData):
     predicted_price = np.expm1(prediction[0])
 
     return {"predicted_price": float(predicted_price)}
+
+# Ensure the app runs on the correct port
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))  # Use PORT assigned by Render
+    uvicorn.run(app, host="0.0.0.0", port=port)
