@@ -15,29 +15,36 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    html, body, [class^="st-"] {
-        background-color: #f5f5f5 !important;
-        color: #000000 !important;
-    }
-    .stApp {
-        background-color: #f5f5f5 !important;
-    }
-    .stTitle, .stMarkdown {
-        color: #2E86C1 !important;
-    }
-    .stSidebar {
-        background-color: #EAECEE !important;
-    }
-    .stButton>button {
-        background-color: #2E86C1 !important;
-        color: white !important;
-        font-size: 18px;
-        border-radius: 10px;
-        padding: 10px;
-    }
-    .stSelectbox, .stNumberInput, .stTextInput {
-        color: #000000 !important;
-    }
+        body {
+            background-color: #f5f5f5;
+        }
+        .stApp {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .stTitle {
+            color: #2E86C1;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .stMarkdown {
+            color: #34495E;
+            text-align: center;
+        }
+        .stButton>button {
+            background-color: #2E86C1 !important;
+            color: white !important;
+            font-size: 18px;
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+        .stSelectbox, .stNumberInput, .stTextInput {
+            color: black !important;
+        }
     </style>
     """,
     unsafe_allow_html=True,
